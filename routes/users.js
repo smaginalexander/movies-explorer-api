@@ -1,21 +1,22 @@
 const router = require('express').Router();
 const {
-    updateUserValidastion,
-    createUservalidation,
+  updateUserValidastion,
+  createUservalidation,
+  loginUservalidation,
 } = require('../middlewares/validation');
 
 const {
-    getUserInfo,
-    createUser,
-    login,
-    updateUser,
+  getUserInfo,
+  createUser,
+  login,
+  updateUser,
 } = require('../controllers/users.js');
 
 const auth = require('../middlewares/auth');
 
 router.get('/users/me', auth, getUserInfo);
-router.put('/users/me', updateUserValidastion, auth, updateUser);
+router.patch('/users/me', updateUserValidastion, auth, updateUser);
 router.post('/signup', createUservalidation, createUser);
-router.post('/signin', createUservalidation, login);
+router.post('/signin', loginUservalidation, login);
 
 module.exports = router;
