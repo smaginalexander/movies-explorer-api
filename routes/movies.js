@@ -9,5 +9,5 @@ const auth = require('../middlewares/auth');
 
 router.get('/movies', auth, getMovies);
 router.post('/movies', movieValidation, auth, createMovie);
-router.delete('/movie/:movieId', deleteMovieValidation, auth, deleteMovie);
+router.delete('/movies/:movieId', deleteMovieValidation, auth, deleteMovie);
 module.exports = router;

@@ -15,6 +15,7 @@ const createMovie = (req, res, next) => {
     thumbnail,
     nameRU,
     nameEN,
+    movieId,
   } = req.body;
   const owner = req.user._id;
   Movie.create({
@@ -29,6 +30,7 @@ const createMovie = (req, res, next) => {
     owner,
     nameRU,
     nameEN,
+    movieId,
   })
     .then((movie) => res.status(200).send(movie))
     .catch((err) => {
@@ -48,13 +50,14 @@ const getMovies = (req, res, next) => {
 
 const deleteMovie = (req, res, next) => {
   const owner = req.user._id;
-  Movie.findByIdAndRemove(req.params.movieId)
+  Movie.findById(req.params.movieId)
     .then((movie) => {
       if (!movie) {
         throw new NotFoundError('Такого фильма не существует');
       } else if (movie.owner.toString() !== owner) {
         throw new ForbidenError('Можно удалять только свои фильмы');
       } else {
+        movie.remove();
         res.send({ data: movie });
       }
     })

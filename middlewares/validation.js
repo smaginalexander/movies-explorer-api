@@ -53,6 +53,7 @@ const movieValidation = celebrate({
     thumbnail: Joi.string().required().regex(/^https?:\/\/(www.)?[\w-]{1,63}\.[\w-]{1,256}[a-z-._~:/?#[\]@!$&'()*+,;=]*#?/i),
     nameRU: Joi.string().required().min(2).max(30),
     nameEN: Joi.string().required().min(2).max(30),
+    movieId: Joi.number().required(),
   }),
   params: Joi.object().keys({
     id: Joi.string().hex().length(24),
