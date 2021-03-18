@@ -35,6 +35,7 @@ const createMovie = (req, res, next) => {
     .then((movie) => res.status(200).send(movie))
     .catch((err) => {
       if (err.name === 'ValidationError') {
+        console.log(err);
         next(new BadRequestError('Переданы некорректные данные'));
         return;
       }
